@@ -12,7 +12,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // parse application/json
 app.use(bodyParser.json())
 
-//require our html routing for our app using express
+//require our api and html routing for our app using express, put api first because we want to display data first
+require('./app/routing/apiRoutes')(app);
 require('./app/routing/htmlRoutes')(app);
 
 //confirms you are connected to local host
