@@ -58,10 +58,8 @@
         <hr>
         <h4>Name (Required)</h4>
         <input type="text" id="name" class="form-control" required>
-        <h3>
-            <strong>Question 1</strong>
-        </h3>
-        <h4>You love being outdoors.</h4>
+ 
+        <h4>1. You love being outdoors.</h4>
         <select class="dropdown" id="q1">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
@@ -70,11 +68,9 @@
             <option value="4">4</option>
             <option value="5">5 (Strongly Agree)</option>
         </select>
-        <h3>
-            <strong>Question 2</strong>
-        </h3>
-        <h4>You enjoy being active.</h4>
-        <select class="dropdown" id="q1">
+
+        <h4>2. You enjoy being active.</h4>
+        <select class="dropdown" id="q2">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -82,11 +78,9 @@
             <option value="4">4</option>
             <option value="5">5 (Strongly Agree)</option>
         </select>
-        <h3>
-            <strong>Question 3</strong>
-        </h3>
-        <h4>You do not travel frequently.</h4>
-        <select class="dropdown" id="q1">
+  
+        <h4>3. You do not travel frequently.</h4>
+        <select class="dropdown" id="q3">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -94,11 +88,9 @@
             <option value="4">4</option>
             <option value="5">5 (Strongly Agree)</option>
         </select>
-        <h3>
-            <strong>Question 4</strong>
-        </h3>
-        <h4>You prefer a big dog.</h4>
-        <select class="dropdown" id="q1">
+
+        <h4>4. You prefer a big dog.</h4>
+        <select class="dropdown" id="q4">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -106,11 +98,9 @@
             <option value="4">4</option>
             <option value="5">5 (Strongly Agree)</option>
         </select>
-        <h3>
-            <strong>Question 5</strong>
-        </h3>
-        <h4>You prefer a dog that does not shed.</h4>
-        <select class="dropdown" id="q1">
+
+        <h4>5. You prefer a dog that does not shed.</h4>
+        <select class="dropdown" id="q5">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -118,8 +108,83 @@
             <option value="4">4</option>
             <option value="5">5 (Strongly Agree)</option>
         </select>
+        <br></br>
+        <button type="submit" class="btn btn-lg btn-primary" id="submit">Submit</button>
         <hr>
     </div>
+    <!-- <div id="results-modal" class="modal fade in" role="dialog" style="display: block; padding-right: 17px;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h2 class="modal-title">Your Furry Friend Match</h2>
+                </div>
+                <div class="modal-body">
+                    <h2 id="match-name">Alex</h2>
+                    <img id="match-img" src="stuff" alt="">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div> -->
+    <script type="text/javascript">
+
+        // Create on click event to get all of the user's answers
+        $("#submit").on("click", function (event) {
+            event.preventDefault();
+
+            // Form validation
+            function validateForm() {
+                var isValid = true;
+                $(".form-control").each(function () {
+                    if ($(this).val() === "") {
+                        isValid = false;
+                    }
+                });
+
+                $(".chosen-select").each(function () {
+
+                    if ($(this).val() === "") {
+                        isValid = false;
+                    }
+                });
+                return isValid;
+            }
+
+            // If all required fields are filled
+            if (validateForm()) {
+                // Create an object for the user's data
+                var userData = {
+                    name: $("#name").val(),
+                    scores: [
+                        $("#q1").val(),
+                        $("#q2").val(),
+                        $("#q3").val(),
+                        $("#q4").val(),
+                        $("#q5").val()
+                    ]
+                };
+
+                // AJAX post the data to the friends API.
+                $.post("/api/friends", userData, function (data) {
+
+                    // Grab the result from the AJAX post so that the best match's name and photo are displayed.
+                    $("#match-name").text(data.name);
+                    $("#match-img").attr("src", data.photo);
+
+                    // Show the modal with the best match
+                    $("#results-modal").modal("toggle");
+
+                });
+            } else {
+                alert("Please fill out all fields before submitting!");
+            }
+        });
+    </script>
+    <!-- <div class="modal-backdrop fade in"></div> -->
 </body>
 
 </html>

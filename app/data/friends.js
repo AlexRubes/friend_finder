@@ -1,4 +1,4 @@
-let friends = [
+let friendsArr = [
     {
         "name": "Labrador",
         "photo": "https://upload.wikimedia.org/wikipedia/commons/2/26/YellowLabradorLooking_new.jpg",
@@ -30,4 +30,6 @@ let friends = [
             1
         ]
     },
-]
+];
+
+module.exports = friendsArr;
