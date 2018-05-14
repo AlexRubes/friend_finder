@@ -1,7 +1,7 @@
 let friendsArr = [
     {
         "name": "Labrador",
-        "photo": "https://upload.wikimedia.org/wikipedia/commons/2/26/YellowLabradorLooking_new.jpg",
+        "photo": "https://cdn.pixabay.com/photo/2016/02/19/15/46/dog-1210559__340.jpg",
         "scores": [
             5,
             1,
